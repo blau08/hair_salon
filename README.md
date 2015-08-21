@@ -1,7 +1,4 @@
-Salon App 8/21/2015
-By Brian Lau
-
-Manage salon by checking in clients and assigning stylists.
+Salon App 8/21/2015 | By Brian Lau | Manage salon by checking in clients and assigning stylists.
 
 * On Windows: Include line in spec_helper and app.rb: 
 "DB = PG.connect({:dbname => 'hair_salon_test', :user => 'postgres', :password => 'secret'})" 
