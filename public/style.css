@@ -1,0 +1,11 @@
+ul.home {
+  margin: 2rem 0 0 0;
+  padding: 0;
+}
+
+ul.home li {
+  list-style-type: none;
+  display: inline;
+  margin: 0 5rem 0 0;
+  padding: 0;
+}

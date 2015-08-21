@@ -1,0 +1,17 @@
+<h1><%= @stylist.stylist_name() %></h1>
+
+<% if @stylist.due_list().any? %>
+  <h3>Clients you currently have checked out:</h3>
+  <% @stylist.due_list().each() do |client_array| %>
+    <ul>
+      <li><a href="/clients/<%= client_array[0] %>/return"> <%= Client.find(client_array[0]).client_name() %></a>, Due on: <%= Date.parse(client_array[1]).strftime('%B %e, %Y')%></li>
+    </ul>
+  <% end %>
+<% else %>
+  <h3>You currently have no clients checked out.</h3>
+<% end %>
+
+<a href="/clients">See List of Clients</a><br>
+<a href="/stylists/<%= @stylist.stylist_id %>/edit">Update Stylist Info</a><br>
+<a href="/stylists">Back to List of Stylists</a><br>
+<a href="/">Home</a>

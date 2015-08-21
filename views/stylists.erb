@@ -1,0 +1,15 @@
+<h1>Here are the Stylists</h1>
+
+<ul>
+  <% @stylists.each() do |stylist| %>
+  <li><a href="/stylists/<%= stylist.stylist_id() %>"> <%= stylist.stylist_name() %></a></li>
+  <% end %>
+</ul>
+
+<h4>Add a stylist:</h4>
+<form action="/stylists/new" method="post">
+  <input type="text" name="stylist_name" id="stylist_name" autofocus placeholder="Stylist Name">
+  <button type="submit">Add stylist</button>
+</form>
+
+<a href="/">Home</a>

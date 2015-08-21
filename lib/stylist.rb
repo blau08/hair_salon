@@ -76,4 +76,22 @@ class Stylist
     end
     clients
   end
+
+  define_method(:clients) do
+    clients = []
+    checkout().each() do |client|
+      clients.push(Client.find(client.fetch(:client_id)))
+    end
+    clients
+  end
+
+  define_method(:due_list) do
+    clients = []
+    checkout().each() do |instance|
+      if instance.fetch(:due_date) != nil
+        clients.push([instance.fetch(:client_id), instance.fetch(:due_date)])
+      end
+    end
+    clients
+  end
 end

@@ -113,7 +113,7 @@ class Client
   define_method(:return_list) do
     return_list = []
     checkout().each() do |instance|
-      return_list.push([instance.fetch(:stylist_id), instance.fetch(:returned_date), instance.fetch(due_date)])
+      return_list.push([instance.fetch(:stylist_id), instance.fetch(:returned_date), instance.fetch(:due_date)])
     end
     return_list
   end

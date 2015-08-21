@@ -1,0 +1,30 @@
+<h1><%= @client.client_name()%></h1>
+
+<% if @client.available? %>
+  <h3>This client is available! Check it out below.</h3>
+  <form action ="/clients/<%=@client.client_id()%>" method="post">
+    <input type="hidden" name="_method" value="patch">
+    <label for="stylist_id">Choose your name from the list:</label>
+    <select id='stylist_id' name='stylist_id' type='text'>
+      <% @stylists.each() do |stylist| %>
+      <option value="<%= stylist.stylist_id()%>"> <%= stylist.stylist_name() %> </option>
+      <% end %>
+    </select>
+    <button type="submit" class="btn btn-primary btn-sm">Check out client!</button>
+  </form>
+<% else %>
+  <h3>This client is currently checked out by <%= @client.who_has_clients?().stylist_name() %>.</h3>
+<% end %>
+
+<h3>Checkout History:</h3>
+<ul><%@client.return_list().each() do |array| %>
+  <% if array[1] != nil %>
+    <li> <%= Stylist.find(array[0]).stylist_name() %>, Returned on: <%= Date.parse(array[1]).strftime('%B %e, %Y') %></li>
+  <% end %>
+  <%end%>
+</ul>
+
+<a href="/clients/<%=@client.client_id()%>/edit">Update Client Info</a><br>
+<a href="/clients">Client List</a><br>
+<a href="/stylists">Stylist List</a><br>
+<a href="/">Home</a>

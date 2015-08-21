@@ -1,0 +1,17 @@
+<h1>Clients in the Salon:</h1>
+
+<ul>
+  <% @clients.each() do |client| %>
+    <li><a href="/clients/<%= client.client_id %>"> <%= client.client_name() %></a></li>
+  <% end %>
+</ul>
+
+<h4>Add a client:</h4>
+<form action="/clients/new" method="post">
+  <input type="text" name="client_name" id="client_name" placeholder="Client Name">
+
+  <button type="submit">Add client</button>
+</form>
+
+<a href="/stylists">List of Stylists</a><br>
+<a href="/">Home</a>

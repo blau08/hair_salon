@@ -1,0 +1,8 @@
+<h1>Client Return</h1>
+<h2><%=@client.who_has_client?().stylist_name()%>, would you like to return <%= @client.title() %>?</h2>
+
+<form action="/clients/<%=@client.client_id()%>/return" method="post">
+  <input type="hidden" name="stylist_id" value="<%=@client.who_has_client?().stylist_id()%>">
+  <input type="hidden" name="_method" value="patch">
+  <button type="submit" class="btn btn-primary btn-sm">Return Client</button>
+</form>
