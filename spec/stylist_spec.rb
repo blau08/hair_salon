@@ -56,4 +56,14 @@ describe(Stylist) do
       expect(test_client.available?()).to(eq(true))
     end
   end
+
+  describe('#delete') do
+    it('deletes a stylist from the database') do
+      test_stylist = Stylist.new({:stylist_name => 'Jon Snow'})
+      test_stylist.save()
+      id = test_stylist.stylist_id()
+      test_stylist.delete()
+      expect(Stylist.find(id)).to(eq([]))
+    end
+  end
 end
