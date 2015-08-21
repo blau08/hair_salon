@@ -5,10 +5,16 @@ Manage salon by checking in clients and assigning stylists.
 
 * On Windows: Include line in spec_helper and app.rb: 
 "DB = PG.connect({:dbname => 'hair_salon_test', :user => 'postgres', :password => 'secret'})" 
-- Clone from GitHub
-- Set up databases: hair_salon and hair_salon_test, with tables: clients (client_id serial PRIMARY KEY, client_name varchar) stylists (stylist_id serial PRIMARY KEY, stylist_name varchar) clients_stylists (id serial PRIMARY KEY, client_id int, stylist_id int, check_out_date timestamp, due_date timestamp, returned_date timestamp)
-- Run bundle
-- Open in Sinatra
+
+1. In PSQL:
+CREATE DATABASE hair_salon;
+CREATE TABLE stylists (stylist_id serial PRIMARY KEY, stylist_name varchar);
+CREATE TABLE clients (client_id serial PRIMARY KEY, client_name varchar);
+CREATE TABLE clients_stylists ((id serial PRIMARY KEY, client_id int, stylist_id int, check_out_date timestamp, due_date timestamp, returned_date timestamp)
+
+2. Run bundle
+
+3. Open in Sinatra
 
 
 Technologies Used: Ruby, Postgres, Sinatra
