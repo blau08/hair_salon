@@ -4,7 +4,7 @@ describe(Client) do
   describe('#client_name') do
     it("return the name of the client") do
       test_client = Client.new({:client_name => 'Samwell Tarley'})
-      expect(test.client_name()).to(eq('Samwell Tarley'))
+      expect(test_client.client_name()).to(eq('Samwell Tarley'))
     end
   end
 
@@ -40,21 +40,21 @@ describe(Client) do
 
   describe('#update') do
     it('lets you add a stylist to a client') do
-      test_stylist = Patron.new({:patron_name => 'Jon Snow'})
+      test_stylist = Stylist.new({:stylist_name => 'Jon Snow'})
       test_stylist.save()
       test_client = Client.new({:client_name => 'Samwell Tarley'})
       test_client.save()
-      test_client.update({:stylist_ids => [test_stylist.patron_id()]})
+      test_client.update({:stylist_ids => [test_stylist.stylist_id()]})
       expect(test_client.stylists()).to(eq([test_stylist]))
     end
 end
 
   describe('#stylists') do
     it('returns all stylists the client has') do
-      test_stylist = Patron.new({:stylist_name => 'Jon Snow'})
+      test_stylist = Stylist.new({:stylist_name => 'Jon Snow'})
       test_stylist.save()
-      id1 = test_stylist1.stylist_id()
-      test_stylist2 = Patron.new({:stylist_name => 'Daenerys'})
+      id1 = test_stylist.stylist_id()
+      test_stylist2 = Stylist.new({:stylist_name => 'Daenerys'})
       test_stylist2.save()
       id2 = test_stylist2.stylist_id()
       test_client = Client.new({:client_name => 'Samwell Tarley'})

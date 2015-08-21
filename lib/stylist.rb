@@ -3,15 +3,15 @@ class Stylist
 
   define_method(:initialize) do |attributes|
     @stylist_name = attributes.fetch(:stylist_name)
-    @stylist_id = attributes.fetch(:stylist_id)
+    @stylist_id = attributes.fetch(:stylist_id, nil)
   end
 
   define_singleton_method(:all) do
     result = DB.exec("SELECT * FROM stylists;")
     stylists = []
     result.each() do |stylist|
-      name = params.fetch("stylist_name")
-      id = params.fetch("stylist_id")
+      name = stylist.fetch("stylist_name")
+      stylist_id = stylist.fetch("stylist_id").to_i()
       stylists.push(Stylist.new({:stylist_name => name, :stylist_id => stylist_id}))
     end
     stylists
@@ -22,7 +22,7 @@ class Stylist
   end
 
   define_method(:save) do
-    result = DB.exec("INSERT INTO stylists (stylist_name) VALUES ('#{@stylist_name}') RETURNING stylist_id;"
+    result = DB.exec("INSERT INTO stylists (stylist_name) VALUES ('#{@stylist_name}') RETURNING stylist_id;")
     @stylist_id = result.first().fetch('stylist_id').to_i()
   end
 
@@ -35,14 +35,14 @@ class Stylist
   end
 
   define_method(:update) do |attributes|
-    @stylist_name = attributes.fetch(:stylist_name, @stylist_name
+    @stylist_name = attributes.fetch(:stylist_name, @stylist_name)
     @id = self.stylist_id()
     DB.exec("UPDATE stylists SET stylist_name = '#{@stylist_name}' WHERE stylist_id = #{@id};")
 
-    attributes.fetch(:client_ids, [].each() do |client_id|)
+    attributes.fetch(:client_ids, []).each() do |client_id|
       @check_out_date = Time.now()
       @due_date = Time.now + (60*60*24*7*2)
-      DB.exec("INSERT INTO clients_stylists (client_id, stylist_id, check_out_date, due_date, returned_date) VALUES (#{client_id}, #{self.stylist_id()}, '#{@check_out_date}', '#{@due_date}', NULL);"))
+      DB.exec("INSERT INTO clients_stylists (client_id, stylist_id, check_out_date, due_date, returned_date) VALUES (#{client_id}, #{self.stylist_id()}, '#{@check_out_date}', '#{@due_date}', NULL);")
     end
 
     attributes.fetch(:returned_client_ids, []).each() do |client_id|
